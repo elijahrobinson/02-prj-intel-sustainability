@@ -1,1 +1,397 @@
-/* Add your CSS here */
+/* Shared colors and spacing make the page easier to adjust later. */
+:root {
+	--sage: #718873;
+	--sage-dark: #34483a;
+	--sage-light: #dce7dc;
+	--sage-highlight: #b8cbb8;
+	--ink: #303a34;
+	--muted-ink: #65716a;
+	--page: #f1f3f1;
+	--white: #ffffff;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--page);
+	color: var(--ink);
+	font-family: "Trebuchet MS", Arial, sans-serif;
+	line-height: 1.6;
+}
+
+/* The fine grid and deep sage layers give the hero a subtle technology feel. */
+.hero {
+	overflow: hidden;
+	color: var(--white);
+	background-color: var(--sage-dark);
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+		linear-gradient(115deg, #526d58 0%, #34483a 62%, #283a32 100%);
+	background-size: 42px 42px, 42px 42px, cover;
+}
+
+.hero-content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 64px;
+	max-width: 1280px;
+	min-height: 650px;
+	margin: 0 auto;
+	padding: 64px 40px 78px;
+}
+
+.hero-copy {
+	flex: 1 1 55%;
+	max-width: 650px;
+}
+
+.intel-logo {
+	display: block;
+	width: 112px;
+	height: auto;
+	margin-bottom: 42px;
+}
+
+.eyebrow {
+	margin: 0 0 12px;
+	color: var(--sage-highlight);
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.hero h1 {
+	max-width: 630px;
+	margin: 0;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 64px;
+	font-weight: 400;
+	line-height: 1.08;
+}
+
+.hero-description {
+	max-width: 510px;
+	margin: 24px 0 28px;
+	color: #e3e9e3;
+	font-size: 1.05rem;
+}
+
+/* This link scrolls to the timeline section below. */
+.timeline-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 18px;
+	min-height: 48px;
+	padding: 11px 18px;
+	border: 1px solid var(--sage-light);
+	border-radius: 4px;
+	background: var(--sage-light);
+	color: #29392e;
+	font-size: 0.95rem;
+	font-weight: 700;
+	text-decoration: none;
+	transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.timeline-button:hover {
+	transform: translateY(-2px);
+	background: #c8d8c8;
+}
+
+.timeline-button:focus-visible,
+.site-footer a:focus-visible {
+	outline: 3px solid var(--sage-highlight);
+	outline-offset: 4px;
+}
+
+.hero-years {
+	margin: 36px 0 0;
+	color: #e3e9e3;
+	font-size: 0.83rem;
+}
+
+.hero-divider {
+	margin: 0 10px;
+	color: var(--sage-highlight);
+}
+
+.hero-image-wrap {
+	position: relative;
+	flex: 0 1 46%;
+	max-width: 540px;
+	padding: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.32);
+	background: rgba(255, 255, 255, 0.08);
+	transform: rotate(2deg);
+}
+
+.hero-image {
+	display: block;
+	width: 100%;
+	height: 350px;
+	object-fit: cover;
+}
+
+.hero-image-caption {
+	margin: 8px 2px 0;
+	color: #e3e9e3;
+	font-size: 0.78rem;
+}
+
+/* The timeline heading introduces the row of milestone cards. */
+.timeline {
+	padding-top: 76px;
+}
+
+.timeline-heading {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 40px 24px;
+}
+
+.timeline-eyebrow {
+	color: var(--sage);
+}
+
+.timeline-heading h2 {
+	margin: 0;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 40px;
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+.timeline-heading > p:last-child {
+	margin: 10px 0 0;
+	color: var(--muted-ink);
+}
+
+/* Flexbox keeps the cards in one scrollable row; snap aligns each card. */
+.timeline-track {
+	display: flex;
+	gap: 22px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 18px max(40px, calc((100vw - 1200px) / 2)) 44px;
+	scroll-padding-inline: max(40px, calc((100vw - 1200px) / 2));
+	scroll-snap-type: x mandatory;
+	scrollbar-color: #9aa89c transparent;
+	scrollbar-width: thin;
+}
+
+/* Fixed card width keeps the horizontal track orderly as it scrolls. */
+.milestone-card {
+	z-index: 0;
+	flex: 0 0 310px;
+	overflow: hidden;
+	border: 1px solid #e0e5e0;
+	border-radius: 8px;
+	background: var(--white);
+	box-shadow: 0 8px 24px rgba(42, 57, 46, 0.08);
+	scroll-snap-align: start;
+	transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+/* Hover and keyboard focus both lift the card and reveal its extra detail. */
+.milestone-card:hover,
+.milestone-card:focus-visible {
+	z-index: 1;
+	outline: none;
+	box-shadow: 0 18px 34px rgba(42, 57, 46, 0.16);
+	transform: translateY(-8px) scale(1.02);
+}
+
+.milestone-card:focus-visible {
+	outline: 3px solid var(--sage);
+	outline-offset: 3px;
+}
+
+.milestone-image {
+	display: block;
+	width: 100%;
+	height: 184px;
+	object-fit: cover;
+}
+
+.card-content {
+	padding: 20px 20px 22px;
+}
+
+.milestone-year {
+	margin: 0 0 6px;
+	color: var(--sage-dark);
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+.card-content h3 {
+	margin: 0 0 10px;
+	color: #35453a;
+	font-size: 1.16rem;
+	line-height: 1.35;
+}
+
+.card-description {
+	margin: 0;
+	color: var(--muted-ink);
+	font-size: 0.92rem;
+}
+
+/* A height and opacity transition makes the extra detail fade into view. */
+.card-more {
+	max-height: 0;
+	overflow: hidden;
+	margin: 0;
+	border-top: 0 solid #e0e5e0;
+	color: #526d58;
+	font-size: 0.87rem;
+	opacity: 0;
+	transition: max-height 250ms ease, margin 250ms ease, padding 250ms ease, opacity 250ms ease;
+}
+
+.milestone-card:hover .card-more,
+.milestone-card:focus-visible .card-more {
+	max-height: 90px;
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top-width: 1px;
+	opacity: 1;
+}
+
+.site-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 18px 40px 32px;
+	color: var(--muted-ink);
+	font-size: 0.84rem;
+}
+
+.site-footer p {
+	margin: 0;
+}
+
+.site-footer p span {
+	padding: 0 6px;
+	color: var(--sage);
+}
+
+.site-footer a {
+	color: var(--sage-dark);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+/* Stack the hero and cards on phones so text and images stay easy to read. */
+@media (max-width: 760px) {
+	.hero-content {
+		min-height: 0;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 40px;
+		padding: 42px 24px 52px;
+	}
+
+	.hero-copy {
+		flex-basis: auto;
+	}
+
+	.intel-logo {
+		width: 98px;
+		margin-bottom: 34px;
+	}
+
+	.hero h1 {
+		font-size: 46px;
+	}
+
+	.hero-image-wrap {
+		align-self: center;
+		width: 100%;
+		max-width: 540px;
+	}
+
+	.hero-image {
+		height: 270px;
+	}
+
+	.timeline {
+		padding-top: 52px;
+	}
+
+	.timeline-heading {
+		padding: 0 24px 18px;
+	}
+
+	.timeline-heading h2 {
+		font-size: 34px;
+	}
+
+	/* Turn off horizontal scrolling and snapping when the cards stack. */
+	.timeline-track {
+		flex-direction: column;
+		gap: 18px;
+		overflow: visible;
+		padding: 12px 24px 36px;
+		scroll-snap-type: none;
+	}
+
+	.milestone-card {
+		flex-basis: auto;
+		width: 100%;
+	}
+
+	.card-more {
+		max-height: none;
+		margin-top: 14px;
+		padding-top: 12px;
+		border-top-width: 1px;
+		opacity: 1;
+	}
+
+	.site-footer {
+		padding: 18px 24px 28px;
+	}
+}
+
+@media (max-width: 420px) {
+	.hero h1 {
+		font-size: 38px;
+	}
+
+	.hero-image {
+		height: 220px;
+	}
+
+	.site-footer {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 8px;
+	}
+}
+
+/* Respect visitors who prefer less movement. */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
